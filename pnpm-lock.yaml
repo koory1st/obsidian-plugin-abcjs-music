@@ -4,11 +4,15 @@ specifiers:
   '@types/node': ^16.11.6
   '@typescript-eslint/eslint-plugin': 5.29.0
   '@typescript-eslint/parser': 5.29.0
+  abcjs: ^6.1.9
   builtin-modules: 3.3.0
   esbuild: 0.17.3
   obsidian: latest
   tslib: 2.4.0
   typescript: 4.7.4
+
+dependencies:
+  abcjs: 6.1.9
 
 devDependencies:
   '@types/node': 16.18.14
@@ -386,6 +390,10 @@ packages:
       '@typescript-eslint/types': 5.29.0
       eslint-visitor-keys: 3.3.0
     dev: true
+
+  /abcjs/6.1.9:
+    resolution: {integrity: sha512-vzGQeMQhn7c6mHNWLuT8TxXq/H7eoDjR0egSSiAC49l0L8jqGvEfeunq2AuqAmezjx5GI/Kd01WI327jw2pxog==}
+    dev: false
 
   /array-union/2.1.0:
     resolution: {integrity: sha512-HGyxoOTYUyCM6stUe6EJgnd4EoewAI7zMdfqO+kGjnlZmBDz/cR5pf8r/cR4Wq60sL/p0IkcjUEEPwS3GFrIyw==}
