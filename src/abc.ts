@@ -1,65 +1,73 @@
 import * as ABCJS from 'abcjs'
+import { parse } from 'path';
+import { parentPort } from 'worker_threads';
 
 const abcOptions = {
   add_classes: true,
   responsive: "resize"
 };
 
-function CursorControl() {
-  var self = this;
+class CursorControlClass implements ABCJS.CursorControl {
+  paperEl: HTMLElement
+  audioEl: HTMLElement
+  beatSubdivisions = 2
 
-  self.onReady = function() {
-  };
-  self.onStart = function() {
-    var svg = document.querySelector(".abc-js-music-paper svg");
+  constructor(paperEl: HTMLElement, audioEl: HTMLElement) {
+    this.paperEl = paperEl
+    this.audioEl = audioEl
+  }
+
+  onStart() {
+    let svg = this.paperEl.querySelector("svg");
+    if (!svg) {
+      return
+    }
     var cursor = document.createElementNS("http://www.w3.org/2000/svg", "line");
     cursor.setAttribute("class", "abcjs-cursor");
     cursor.setAttributeNS(null, 'x1', 0);
     cursor.setAttributeNS(null, 'y1', 0);
     cursor.setAttributeNS(null, 'x2', 0);
     cursor.setAttributeNS(null, 'y2', 0);
+
     svg.appendChild(cursor);
+  }
 
-  };
-  self.beatSubdivisions = 2;
-  self.onBeat = function(beatNumber, totalBeats, totalTime) {
-  };
-  self.onEvent = function(ev) {
-    if (ev.measureStart && ev.left === null)
-      return; // this was the second part of a tie across a measure line. Just ignore it.
-
-    var lastSelection = document.querySelectorAll(".abc-js-music-paper svg .highlight");
-    for (var k = 0; k < lastSelection.length; k++)
-      lastSelection[k].classList.remove("highlight");
-
-    for (var i = 0; i < ev.elements.length; i++) {
-      var note = ev.elements[i];
-      for (var j = 0; j < note.length; j++) {
-        note[j].classList.add("highlight");
-      }
-    }
-
-    var cursor = document.querySelector(".abc-js-music-paper svg .abcjs-cursor");
-    if (cursor) {
-      cursor.setAttribute("x1", ev.left - 2);
-      cursor.setAttribute("x2", ev.left - 2);
-      cursor.setAttribute("y1", ev.top);
-      cursor.setAttribute("y2", ev.top + ev.height);
-    }
-  };
-  self.onFinished = function() {
-    var els = document.querySelectorAll("svg .highlight");
+  onFinished() {
+    var els = this.paperEl.querySelectorAll("svg .highlight");
     for (var i = 0; i < els.length; i++) {
       els[i].classList.remove("highlight");
     }
-    var cursor = document.querySelector(".abc-js-music-paper svg .abcjs-cursor");
+    var cursor = this.paperEl.querySelector("svg .abcjs-cursor");
     if (cursor) {
       cursor.setAttribute("x1", 0);
       cursor.setAttribute("x2", 0);
       cursor.setAttribute("y1", 0);
       cursor.setAttribute("y2", 0);
     }
-  };
+  }
+  onEvent(event: ABCJS.NoteTimingEvent): void {
+    if (event.measureStart && event.left === null)
+      return; // this was the second part of a tie across a measure line. Just ignore it.
+
+    var lastSelection = this.paperEl.querySelectorAll("svg .highlight");
+    for (var k = 0; k < lastSelection.length; k++)
+      lastSelection[k].classList.remove("highlight");
+
+    for (var i = 0; i < event.elements.length; i++) {
+      var note = event.elements[i];
+      for (var j = 0; j < note.length; j++) {
+        note[j].classList.add("highlight");
+      }
+    }
+
+    var cursor = this.paperEl.querySelector("svg .abcjs-cursor");
+    if (cursor) {
+      cursor.setAttribute("x1", event.left - 2);
+      cursor.setAttribute("x2", event.left - 2);
+      cursor.setAttribute("y1", event.top);
+      cursor.setAttribute("y2", event.top + event.height);
+    }
+  }
 }
 
 
@@ -70,7 +78,7 @@ export function load(paperEl: HTMLElement, audioEl: HTMLElement, source: String)
 
 
 
-  let cursorControl = new CursorControl();
+  let cursorControl = new CursorControlClass(paperEl, audioEl);
 
   let synthControl;
 
