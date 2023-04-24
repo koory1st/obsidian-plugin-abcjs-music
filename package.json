@@ -1,6 +1,6 @@
 {
   "name": "obsidian-plugin-abcjs-music",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Abc.js based obsidian music notation plugin",
   "main": "main.js",
   "scripts": {
