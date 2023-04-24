@@ -1,8 +1,4 @@
 import * as ABCJS from 'abcjs'
-import { parse } from 'path';
-import { parentPort } from 'worker_threads';
-
-
 
 class CursorControlClass implements ABCJS.CursorControl {
   paperEl: HTMLElement
@@ -19,7 +15,7 @@ class CursorControlClass implements ABCJS.CursorControl {
     if (!svg) {
       return
     }
-    var cursor = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    let cursor = document.createElementNS("http://www.w3.org/2000/svg", "line");
     cursor.setAttribute("class", "abcjs-cursor");
     cursor.setAttributeNS(null, 'x1', '0');
     cursor.setAttributeNS(null, 'y1', '0');
@@ -30,11 +26,11 @@ class CursorControlClass implements ABCJS.CursorControl {
   }
 
   onFinished() {
-    var els = this.paperEl.querySelectorAll("svg .highlight");
-    for (var i = 0; i < els.length; i++) {
+    let els = this.paperEl.querySelectorAll("svg .highlight");
+    for (let i = 0; i < els.length; i++) {
       els[i].classList.remove("highlight");
     }
-    var cursor = this.paperEl.querySelector("svg .abcjs-cursor");
+    let cursor = this.paperEl.querySelector("svg .abcjs-cursor");
     if (cursor) {
       cursor.setAttribute("x1", '0');
       cursor.setAttribute("x2", '0');
@@ -42,20 +38,21 @@ class CursorControlClass implements ABCJS.CursorControl {
       cursor.setAttribute("y2", '0');
     }
   }
+
   onEvent(event: ABCJS.NoteTimingEvent): void {
     if (event.measureStart && event.left === null)
       return; // this was the second part of a tie across a measure line. Just ignore it.
 
-    var lastSelection = this.paperEl.querySelectorAll("svg .highlight");
-    for (var k = 0; k < lastSelection.length; k++)
+    let lastSelection = this.paperEl.querySelectorAll("svg .highlight");
+    for (let k = 0; k < lastSelection.length; k++)
       lastSelection[k].classList.remove("highlight");
 
     if (!event || !event.elements) {
       return;
     }
-    for (var i = 0; i < event.elements.length; i++) {
-      var note = event.elements[i];
-      for (var j = 0; j < note.length; j++) {
+    for (let i = 0; i < event.elements.length; i++) {
+      let note = event.elements[i];
+      for (let j = 0; j < note.length; j++) {
         note[j].classList.add("highlight");
       }
     }
@@ -64,7 +61,7 @@ class CursorControlClass implements ABCJS.CursorControl {
       return;
     }
 
-    var cursor = this.paperEl.querySelector("svg .abcjs-cursor");
+    let cursor = this.paperEl.querySelector("svg .abcjs-cursor");
     if (cursor) {
       let x = String(event.left - 2);
       cursor.setAttribute("x1", x);
@@ -77,7 +74,6 @@ class CursorControlClass implements ABCJS.CursorControl {
   }
 }
 
-
 export function load(paperEl: HTMLElement, audioEl: HTMLElement, source: string) {
   console.log("abc load method");
   console.log(paperEl);
@@ -87,8 +83,6 @@ export function load(paperEl: HTMLElement, audioEl: HTMLElement, source: string)
     audioEl.innerHTML = "<div class='audio-error'>Audio is not supported in this browser.</div>";
     return;
   }
-
-
 
   let cursorControl = new CursorControlClass(paperEl, audioEl);
 
@@ -104,9 +98,9 @@ export function load(paperEl: HTMLElement, audioEl: HTMLElement, source: string)
     add_classes: true,
     responsive: "resize"
   };
-  var visualObj = ABCJS.renderAbc(paperEl, source, abcOptions)[0];
+  let visualObj = ABCJS.renderAbc(paperEl, source, abcOptions)[0];
 
-  var midiBuffer = new ABCJS.synth.CreateSynth();
+  let midiBuffer = new ABCJS.synth.CreateSynth();
 
   midiBuffer.init({
     visualObj: visualObj,

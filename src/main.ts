@@ -2,8 +2,6 @@ import { App, Editor, MarkdownView, Modal, Notice, Plugin, PluginSettingTab, Set
 import { addAbcEl } from './html_element_operator';
 import * as abc from './abc'
 
-// Remember to rename these classes and interfaces!
-
 interface AbcJsMusicPluginSettings {
   mySetting: string;
 }
@@ -12,7 +10,6 @@ const DEFAULT_SETTINGS: AbcJsMusicPluginSettings = {
   mySetting: 'default'
 }
 
-const optionsRegex = new RegExp(/(?<options>{.*})\n---\n(?<source>.*)/s);
 export default class AbcJsMusicPlugin extends Plugin {
   settings: AbcJsMusicPluginSettings;
 
@@ -31,8 +28,8 @@ export default class AbcJsMusicPlugin extends Plugin {
     console.log("source", source);
     console.log("el", el);
     console.log("ctx", ctx);
-
   }
+
   onunload() {
 
     console.log("AbcJsMusci end");
