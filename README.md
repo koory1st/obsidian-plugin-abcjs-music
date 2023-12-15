@@ -6,6 +6,8 @@
 
 This is an Obsidian plugin that integrates the abc.js library, allowing you to write sheet music and play it within Obsidian.
 
+<iframe src="//player.bilibili.com/player.html?aid=791763848&bvid=BV1zC4y1979J&cid=1356757187&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
 # Installation
 
 Download the three files from the "release" section and place them in the `obsidian_vault_folder/.obsidian/plugins/obsidian-plugin-abcjs-music` directory of your Obsidian vault. 
