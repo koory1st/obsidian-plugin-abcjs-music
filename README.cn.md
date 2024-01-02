@@ -34,6 +34,6 @@ https://github.com/abcjs-music/obsidian-plugin-abcjs
 
 如果你觉得这个插件还不错，可以送作者一杯咖啡，给作者动力去开发更好更有意思的东西。
 
-<img src="https://blog.matou.dev/images/weixin_qrcode.png" width = "300" height = "300" alt="图片名称" align=center /> <img src="https://blog.matou.dev/images/zhifubao_qrcode.jpg" width = "300" height = "300" alt="图片名称" align=center />
+[为爱发电，交个朋友](https://afdian.net/album/846832aca96311eeb20c5254001e7c00)
 
 [Buy Me a Coffee. ko-fi.co.](https://ko-fi.com/levygu)
