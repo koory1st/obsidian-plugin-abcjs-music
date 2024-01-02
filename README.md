@@ -47,4 +47,4 @@ If you find this plugin useful, consider buying me a cup of coffee to give them 
 [Buy Me a Coffee. ko-fi.co.](https://ko-fi.com/levygu)
 
 
-[交个朋友]（https://afdian.net/album/846832aca96311eeb20c5254001e7c00）
+[交个朋友](https://afdian.net/album/846832aca96311eeb20c5254001e7c00)
