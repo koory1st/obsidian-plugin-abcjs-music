@@ -46,4 +46,5 @@ If you find this plugin useful, consider buying me a cup of coffee to give them 
 
 [Buy Me a Coffee. ko-fi.co.](https://ko-fi.com/levygu)
 
-<img src="https://blog.matou.dev/images/weixin_qrcode.png" width = "300" height = "300" alt="图片名称" align=center /> <img src="https://blog.matou.dev/images/zhifubao_qrcode.jpg" width = "300" height = "300" alt="图片名称" align=center />
+
+[交个朋友]（https://afdian.net/album/846832aca96311eeb20c5254001e7c00）
